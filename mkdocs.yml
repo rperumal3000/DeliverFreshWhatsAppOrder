@@ -1,0 +1,50 @@
+site_name: DeliverFreshWhatsAppOrder
+site_url: https://rperumal3000.github.io/DeliverFreshWhatsAppOrder/
+repo_url: https://github.com/rperumal3000/DeliverFreshWhatsAppOrder
+repo_name: GitHub
+edit_uri: ""
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+
+plugins:
+  - i18n:
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: hi
+          name: Hindi
+          build: true
+        - locale: ta
+          name: Tamil
+          build: true
+        - locale: ja
+          name: Japanese
+          build: true
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - def_list
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra:
+  version:
+    provider: mike
