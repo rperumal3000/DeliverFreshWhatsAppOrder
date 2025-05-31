@@ -36,7 +36,7 @@ Full documentation is available at:
 
 # 🛠 Contributing
 
-See https://github.com/rperumal3000/DeliverFreshWhatsAppOrder/new/main?filename=CONTRIBUTING.md for guidelines on how to contribute.
+See https://github.com/rperumal3000/DeliverFreshWhatsAppOrder/blob/main/CONTRIBUTING.md for guidelines on how to contribute.
 
 # 🐛 Issues / Feedback
 
