@@ -1,40 +1,31 @@
-[build-system]
-requires = ["setuptools>=61", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "deliverfresh-whatsapp-order"
 version = "0.1.0"
-description = "Clean and normalize WhatsApp chat orders exported in .txt format"
-readme = "README.md"
-requires-python = ">=3.7"
-license = { file = "LICENSE" }
+description = "Clean and normalize WhatsApp chat orders (.txt) into structured product lists"
 authors = [
   { name="Raman Perumal", email="rperumal3000@gmail.com" }
 ]
-keywords = ["whatsapp", "order", "chat", "cleaning", "deliverfresh", "colab"]
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Intended Audience :: End Users/Desktop",
-    "Topic :: Text Processing :: Linguistic",
-    "Topic :: Utilities",
-]
-
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.7"
 dependencies = []
 
 [project.urls]
-Homepage = "https://rperumal3000.github.io/DeliverFreshWhatsAppOrder"
+Homepage = "https://github.com/rperumal3000/DeliverFreshWhatsAppOrder"
 Documentation = "https://rperumal3000.github.io/DeliverFreshWhatsAppOrder"
-Source = "https://github.com/rperumal3000/DeliverFreshWhatsAppOrder"
 Issues = "https://github.com/rperumal3000/DeliverFreshWhatsAppOrder/issues"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["deliverfresh_whatsapp_order"]
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = "-ra -q"
-testpaths = ["tests"]
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-static-i18n",
+  "twine",
+  "build"
+]
