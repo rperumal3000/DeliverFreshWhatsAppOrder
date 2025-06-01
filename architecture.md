@@ -1,116 +1,104 @@
-# 🌐 Cookiecutter DeliverFresh Package: Architecture & Deployment Document
+# 🏗️ Architecture: DeliverFreshWhatsAppOrder
 
-## 🔄 Executive Summary
-This document outlines the technical and operational architecture for building and distributing a reusable Python package for cleaning WhatsApp order data. The solution leverages Cookiecutter templates, Google Colab notebooks, GitHub for version control, GitHub Actions for CI/CD automation, MkDocs for multilingual documentation, and PyPI/TestPyPI for package distribution.
+## 📌 Project Objective
 
-## 📊 Project Structure
+To build a reusable, pip-installable Python package that can:
+- Clean and normalize WhatsApp order `.txt` exports.
+- Be operated by non-developers via Google Colab.
+- Be versioned, tested, and documented using industry-standard DevOps practices.
+- Be published to PyPI and consumed by any downstream script or application.
+
+---
+
+## 📁 Folder Structure
+
 ```
-cookiecutter-deliverfresh/
-├── {{cookiecutter.project_slug}}/
-│   └── {{cookiecutter.package_name}}/
-│       └── __init__.py
-├── tests/
+DeliverFreshWhatsAppOrder/
+│
+├── deliverfresh_whatsapp_order/     # 📦 Main Python package logic
+│   └── __init__.py
+│   └── cleaner.py                   # All text cleaning logic
+│
+├── tests/                           # ✅ Unit tests
 │   └── test_cleaner.py
-├── docs/
-│   ├── index.en.md
-│   ├── index.hi.md
-│   ├── index.ta.md
-│   └── usage.md
-├── images/
-│   └── logo.png
-├── mkdocs.yml
-├── setup.cfg
-├── pyproject.toml
-├── MANIFEST.in
+│
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml
-├── LICENSE
-├── README.md
+│       └── ci.yml                   # GitHub Actions: Pytest + Coverage
+│
+├── docs/                            # 🌐 MkDocs multilingual documentation
+│   └── index.md (EN, HI, TA, JA)
+│
+├── pyproject.toml                   # 📦 Package metadata (PEP 621)
+├── README.md                        # 📝 Project overview
+├── LICENSE                          # ⚖️ MIT License
+├── CONTRIBUTING.md                  # 🙌 Guidelines to contribute
+├── CONTRIBUTORS.md                  # 🧑‍💻 Credits
+└── .gitignore                       # 🚫 Ignore unnecessary files
 ```
 
-## 🚓 Technology Stack
-| Layer           | Tool/Technology           |
-|----------------|---------------------------|
-| Template        | Cookiecutter              |
-| Development     | Google Colab              |
-| Documentation   | MkDocs + Material Theme   |
-| Multilingual    | mkdocs-static-i18n        |
-| Versioning      | mike + Git tags           |
-| CI/CD Automation| GitHub Actions            |
-| Packaging       | build + twine + PyPI      |
-| Testing         | pytest                    |
+---
 
-## 📖 Functional Overview
-1. **Modular Python Package**: Provides a reusable data cleaning function.
-2. **Google Colab Integration**: Simplifies use by non-technical users.
-3. **Multilingual Documentation**: Supports English, Hindi, and Tamil using MkDocs.
-4. **Automated CI/CD**: Uses GitHub Actions for deployment on Git tag push.
-5. **Versioned Docs**: Supports versioning through `mike` and GitHub Pages.
-6. **Distributable via PyPI**: Users can `pip install` the package directly.
+## 🛠️ Toolchain
 
-## 📚 Implementation Steps
+| Purpose                         | Tool/Framework                  |
+|----------------------------------|----------------------------------|
+| Package Management               | `pyproject.toml` (PEP 621)       |
+| CI/CD Pipeline                   | GitHub Actions (`ci.yml`)        |
+| Test Framework                   | `pytest`, `pytest-cov`, `coverage` |
+| Docs & Site                      | `mkdocs-material`, `mkdocs-static-i18n` |
+| Multilingual Support             | English, Hindi, Tamil, Japanese |
+| GitHub Pages Deployment          | `mike` for versioned documentation |
+| Google Colab Execution           | Notebook with `pip install` + input/output |
+| Python Packaging + Distribution  | `build`, `twine`, `TestPyPI` + `PyPI` |
 
-### 1. Create Cookiecutter Template
-- Initialize `cookiecutter.json` with input prompts
-- Create dynamic folder and file structure
+---
 
-### 2. Set Up Python Packaging
-- Configure `pyproject.toml`, `setup.cfg`, and `MANIFEST.in`
-- Implement `__init__.py` and reusable function module
+## 📦 Google Colab Usage (Entry Point)
 
-### 3. Develop Documentation
-- Add multilingual docs in `docs/`
-- Configure MkDocs with `mkdocs.yml` and Material theme
-- Add search, favicon, and logo support
+```python
+from deliverfresh_whatsapp_order import clean_chat_file
 
-### 4. Integrate CI/CD
-- Add GitHub Actions workflow in `.github/workflows/deploy.yml`
-- Install dependencies and deploy docs using `mike`
-- Trigger on tag push
+input_file = "/content/drive/MyDrive/DeliveryFresh/WhatsAppInput/sample.txt"
+output_file = "/content/drive/MyDrive/DeliveryFresh/WhatsAppOutput/sample_cleaned.txt"
 
-### 5. Command-Line Usage
-```bash
-pip install -e .[dev]
-pytest
-python -m build
-twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-mkdocs serve
-mike deploy --update-aliases 0.1 latest
-git tag 0.1 && git push origin 0.1
+clean_chat_file(input_file, output_file)
 ```
 
-## 🔐 Roles & Access Control
-| Role         | Responsibility                         |
-|--------------|-----------------------------------------|
-| Maintainer   | Tagging, merging PRs, managing releases |
-| Contributor  | Writing docs, submitting code fixes     |
-| End User     | Installing and running the package      |
+---
 
-## ✅ Project Checklist
-- [x] Cookiecutter scaffold complete
-- [x] Cleaner logic implemented and tested
-- [x] GitHub repo and action workflows live
-- [x] MkDocs with multilingual support configured
-- [x] Auto-deploy on version tags
-- [x] Uploaded to TestPyPI
+## ⚙️ GitHub Actions (CI/CD)
 
-## 🚀 Roadmap & Enhancements
-- Add CLI interface via argparse or click
-- Generate release notes from changelog
-- Auto-publish to PyPI on tag push
-- Add support for Google Sheets integration
+| Workflow File        | Purpose                            |
+|----------------------|-------------------------------------|
+| `.github/workflows/ci.yml` | ✅ Run tests + Generate coverage report |
 
-## 📆 Maintenance Guidelines
-- Use semantic versioning for releases
-- Monitor PyPI/TestPyPI uploads
-- Test all changes with `pytest` before release
-- Use `mike serve` to preview docs locally
+- Automatically runs on every `push` or `pull_request` to `main`.
+- HTML report (`htmlcov/index.html`) uploaded as an artifact.
 
-## 🌐 References & Resources
-- [Cookiecutter](https://cookiecutter.readthedocs.io/)
-- [MkDocs](https://www.mkdocs.org/)
-- [Mike](https://github.com/jimporter/mike)
-- [PyPI](https://pypi.org/)
-- [Twine](https://twine.readthedocs.io/)
-- [GitHub Actions](https://docs.github.com/en/actions)
+---
+
+## 🌐 Documentation Strategy
+
+- Built with `mkdocs` and deployed via `mike` to `gh-pages`
+- Localized using `mkdocs-static-i18n`
+- Available at: [https://rperumal3000.github.io/DeliverFreshWhatsAppOrder](https://rperumal3000.github.io/DeliverFreshWhatsAppOrder)
+
+---
+
+## 🚀 Deployment & Distribution
+
+| Step                         | Status                          |
+|-----------------------------|----------------------------------|
+| GitHub Release              | ✅ Created with version tag `v0.1` |
+| PyPI Package                | ✅ Published via `twine`         |
+| GitHub Pages Docs           | ✅ Published via `mike deploy`   |
+
+---
+
+## 🔒 Security & Stability
+
+- Pinned action versions in GitHub Actions
+- `.gitignore` configured to skip checkpoints, temp files, and coverage
+- Source protected: user only updates input/output paths in Colab
+- Read-only packaging from PyPI ensures consistency
