@@ -1,23 +1,18 @@
-[build-system]
-requires = ["setuptools>=61.0", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "deliverfresh-whatsapp-order"
-version = "0.0.0"  # Placeholder; overridden by setuptools_scm from Git tag
-description = "Clean WhatsApp chat exports into structured product lists"
-authors = [{ name = "Raman Perumal", email = "your@email.com" }]
+version = "0.1.6"
+description = "Clean and normalize WhatsApp chat orders into structured product lists."
 readme = "README.md"
 license = { file = "LICENSE" }
-keywords = ["whatsapp", "order", "cleaning", "text", "data"]
-requires-python = ">=3.8"
+authors = [
+  { name = "Raman Perumal", email = "rperumal3000@gmail.com" }
+]
+requires-python = ">=3.7"
 dependencies = []
 
-[project.urls]
-Homepage = "https://github.com/rperumal3000/DeliverFreshWhatsAppOrder"
-Documentation = "https://rperumal3000.github.io/DeliverFreshWhatsAppOrder"
-Issues = "https://github.com/rperumal3000/DeliverFreshWhatsAppOrder/issues"
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "build", "twine"]
 
-[tool.setuptools_scm]
-version_scheme = "strict-semver"
-local_scheme = "no-local-version"
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"

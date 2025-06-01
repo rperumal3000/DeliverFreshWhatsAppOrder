@@ -1,36 +1,33 @@
-name: 🧪 Publish to TestPyPI (Manual)
+name: 🧪 Upload to TestPyPI (Manual)
 
 on:
   workflow_dispatch:  # Manual trigger from GitHub Actions UI
 
 jobs:
-  publish-to-testpypi:
-    name: 🧪 Upload to TestPyPI
+  build-and-publish:
+    name: 🧪 Build and Upload to TestPyPI
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout full repo with tags
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: 🔧 Install build tools
+      - name: 📦 Install build tools
         run: |
           python -m pip install --upgrade pip
-          pip install build setuptools_scm
+          pip install build twine
 
       - name: 🛠️ Build the distribution
         run: python -m build
 
-      - name: 🚀 Upload to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          user: __token__
-          password: ${{ secrets.TEST_PYPI_TOKEN }}
+      - name: 🔐 Upload to TestPyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        run: |
+          twine upload --repository testpypi dist/*
