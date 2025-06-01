@@ -20,12 +20,21 @@ pip install deliverfresh-whatsapp-order
 # 📄 Usage Example (in Google Colab)
 
 ```bash
+# 📌 Mount Google Drive
+from google.colab import drive
+drive.mount('/content/drive')
+
+# 📌 Import and use the package
 from deliverfresh_whatsapp_order import clean_chat_file
 
-input_file = "/content/drive/MyDrive/DeliveryFresh/WhatsAppInput/sample.txt"
-output_file = "/content/drive/MyDrive/DeliveryFresh/WhatsAppOutput/sample_cleaned.txt"
+# ✅ Set paths (editable by user)
+input_path = "/content/drive/MyDrive/DeliveryFresh/WhatsAppInput/inputfile.txt"
+output_path = "/content/drive/MyDrive/DeliveryFresh/WhatsAppOutput/inputfile_Cleaned.txt"
 
-clean_chat_file(input_file, output_file)
+# 🚀 Run the cleaning
+clean_chat_file(input_path, output_path)
+
+print("✅ Cleaning complete. Check your output file.")
 ```
 
 # 📚 Documentation
