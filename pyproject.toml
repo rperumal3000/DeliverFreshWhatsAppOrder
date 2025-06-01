@@ -1,32 +1,18 @@
-[build-system]
-requires = ["setuptools>=61.0", "setuptools_scm"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "deliverfresh-whatsapp-order"
-dynamic = ["version"]
-description = "Clean and normalize WhatsApp chat orders exported as .txt files."
+version = "0.1.9"
+description = "Clean and normalize WhatsApp chat orders into structured product lists."
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Raman Perumal", email = "your-email@example.com" }
+  { name = "Raman Perumal", email = "rperumal3000@gmail.com" }
 ]
-keywords = ["whatsapp", "orders", "cleaner", "parser", "text"]
-classifiers = [
-  "Programming Language :: Python :: 3",
-  "License :: OSI Approved :: MIT License",
-  "Operating System :: OS Independent"
-]
-requires-python = ">=3.8"
+requires-python = ">=3.7"
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-cov", "build", "twine", "mkdocs", "mkdocs-material", "mkdocs-static-i18n"]
+dev = ["pytest", "pytest-cov", "build", "twine"]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["deliverfresh_whatsapp_order"]
-
-[tool.setuptools_scm]
-version_scheme = "post-release"
-local_scheme = "no-local-version"
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
