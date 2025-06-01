@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@e39e39d3a7e4cf0a3a23195b17d8aab974c4f6a0  # v3
 
       - name: 🐍 Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@a2e5e040c7f5bc74161e4d422d8ce954e4aa97ba  # v4
         with:
           python-version: '3.10'
 
@@ -35,7 +35,7 @@ jobs:
           cp -r htmlcov/* public/
 
       - name: 📤 Upload HTML coverage as artifact
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@79e34a30f3cbda87f7c58e02f7efad208d945b4e  # v3
         with:
           name: html-coverage-report
           path: public
